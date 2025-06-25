@@ -1,9 +1,77 @@
-import example.pepita
+import planetas.*
 
-describe "group of tests for pepita" {
+describe "planeta con 4 habitantes, dos murallas y un museo" {
+  const melmack = new Planeta()
+  const pers1 = new Persona( edad = 19)
+  const pers2 = new Persona( edad = 60)
+  const pers3 = new Persona( edad = 12)
+  const pers4 = new Persona( edad = 39)
+  const imalaya = new Muralla(longitud = 25)
+  const guayana = new Muralla(longitud = 10)
+  const vellasArtes = new Museo(superficieCubierta  = 50, indiceDeImportancia = 4)
+  const terra = new Planeta()
+  const pers = new Persona( edad = 17)
+  const pers5 = new Persona( edad = 68)
+  const pers6 = new Persona( edad = 4)
+  const pers7= new Persona( edad = 9)
+  const aconcagua = new Muralla(longitud = 2)
+  const local = new Museo(superficieCubierta  = 5, indiceDeImportancia = 1)
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  method initialize(){
+    melmack.agregarHabitante(pers1)
+    melmack.agregarHabitante(pers2)
+    melmack.agregarHabitante(pers3)
+    melmack.agregarHabitante(pers4)
+    melmack.agregarConstruccion(imalaya)
+    melmack.agregarConstruccion(guayana)
+    melmack.agregarConstruccion(vellasArtes)
+    pers1.ganarMonedad(12)
+    pers2.ganarMonedad(32)
+    pers4.ganarMonedad(102)
+
+    melmack.agregarHabitante(pers)
+    melmack.agregarHabitante(pers5)
+    melmack.agregarHabitante(pers6)
+    melmack.agregarHabitante(pers7)
+    melmack.agregarConstruccion(aconcagua)
+    melmack.agregarConstruccion(local)
+    pers.ganarMonedad(3)
+    pers5.ganarMonedad(2)
+    pers6.ganarMonedad(4)
+    pers7.ganarMonedad(6)
+
+  }
+  test "la delegacion diplomatica esta formada por tres personas" {
+    melmack.crearDelegacionDiplomatica()
+    assert.equals(3,melmack.cantidadDeMiembrosDelegacion())
   }
 
+  test "es valioso"{
+    assert.that(melmack.esValioso())
+  }
+
+  test" agregar otro planeta, con habitantes y construcciones, pero que no sea valioso." {
+    assert.notThat(terra.esValioso())
+  } 
+
 }
+
+describe "probar crear constructores y productores" {
+
+    const constructor1 = new Constructor(edad = 33, inteligencia = 12, regionDondeVive= "montaña")
+    const constructor2 = new Constructor(edad = 25, inteligencia = 30, regionDondeVive= "costa")
+    const constructor3 = new Constructor(edad = 40, inteligencia = 2, regionDondeVive= "llanura")
+    const constructor4 = new Constructor(edad = 21, inteligencia = 18, regionDondeVive= "desierto")
+    const productor = new Productor(edad = 21)
+    const marte = new Planeta()
+    method initialize(){
+      marte.agregarHabitante(productor)
+      productor.trabajarDurante(5,marte)
+    }
+  test "productor trabaja"{ 
+        assert.equals(35, productor.recursos())
+    }
+  test "constructor trabaja"{}
+  
+}
+
